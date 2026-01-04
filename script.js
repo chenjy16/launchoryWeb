@@ -139,3 +139,43 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+
+// 懒加载图片功能
+document.addEventListener('DOMContentLoaded', () => {
+    const lazyImages = [].slice.call(document.querySelectorAll('img.lazy'));
+
+    if ('IntersectionObserver' in window) {
+        const imageObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    const highResSrc = img.getAttribute('data-src');
+                    
+                    // 预加载高分辨率图片
+                    const highResImage = new Image();
+                    highResImage.onload = function() {
+                        img.src = highResSrc;
+                        img.classList.remove('lazy');
+                        img.classList.add('loaded');
+                        imageObserver.unobserve(img);
+                    };
+                    highResImage.src = highResSrc;
+                }
+            });
+        });
+
+        lazyImages.forEach(img => {
+            imageObserver.observe(img);
+        });
+    } else {
+        // 如果不支持IntersectionObserver，则立即加载图片
+        lazyImages.forEach(img => {
+            const highResSrc = img.getAttribute('data-src');
+            if (highResSrc) {
+                img.src = highResSrc;
+                img.classList.remove('lazy');
+                img.classList.add('loaded');
+            }
+        });
+    }
+});

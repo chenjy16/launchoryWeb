@@ -368,6 +368,15 @@ section {
     border-radius: var(--border-radius);
     box-shadow: var(--shadow-hover);
     border: 1px solid #e0e0e4;
+    transition: opacity 0.3s ease;
+}
+
+.demo-image.lazy {
+    opacity: 0.5;
+}
+
+.demo-image.loaded {
+    opacity: 1;
 }
 
 .download-note {
