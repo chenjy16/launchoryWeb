@@ -350,6 +350,26 @@ section {
     background-color: white;
 }
 
+/* 演示区域样式 */
+.demo {
+    background-color: var(--secondary-color);
+    padding: calc(var(--section-gap) - 20px) 0;
+}
+
+.demo-content {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.demo-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-hover);
+    border: 1px solid #e0e0e4;
+}
+
 .download-note {
     margin-top: 20px;
     color: var(--text-secondary);
